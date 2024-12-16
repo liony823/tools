@@ -17,7 +17,7 @@ package mcontext
 import (
 	"context"
 
-	"github.com/openimsdk/lion/tools/errs"
+	"github.com/liony823/tools/errs"
 	"github.com/openimsdk/protocol/constant"
 )
 

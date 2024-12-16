@@ -22,7 +22,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/openimsdk/lion/tools/errs"
+	"github.com/liony823/tools/errs"
 )
 
 // ClientConfig defines configuration for the HTTP client.

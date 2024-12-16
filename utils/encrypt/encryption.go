@@ -21,7 +21,7 @@ import (
 	"crypto/md5"
 	"encoding/hex"
 
-	"github.com/openimsdk/lion/tools/errs"
+	"github.com/liony823/tools/errs"
 )
 
 // Md5 returns the md5 hash of the input string.

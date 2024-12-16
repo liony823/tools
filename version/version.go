@@ -18,7 +18,7 @@ import (
 	"fmt"
 	"runtime"
 
-	"github.com/openimsdk/lion/tools/errs"
+	"github.com/liony823/tools/errs"
 	"gopkg.in/src-d/go-git.v4"
 )
 

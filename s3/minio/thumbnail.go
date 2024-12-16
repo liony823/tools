@@ -27,10 +27,10 @@ import (
 	"strings"
 	"time"
 
+	"github.com/liony823/tools/errs"
+	"github.com/liony823/tools/log"
+	"github.com/liony823/tools/s3"
 	"github.com/minio/minio-go/v7"
-	"github.com/openimsdk/lion/tools/errs"
-	"github.com/openimsdk/lion/tools/log"
-	"github.com/openimsdk/lion/tools/s3"
 )
 
 func (m *Minio) getImageThumbnailURL(ctx context.Context, name string, expire time.Duration, opt *s3.Image) (string, error) {

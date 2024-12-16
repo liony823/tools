@@ -14,7 +14,7 @@
 
 package specialerror
 
-import "github.com/openimsdk/lion/tools/errs"
+import "github.com/liony823/tools/errs"
 
 var handlers []func(err error) errs.CodeError
 

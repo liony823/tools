@@ -7,7 +7,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/openimsdk/lion/tools/utils/mageutil"
+	"github.com/liony823/tools/utils/mageutil"
 )
 
 var Default = Build

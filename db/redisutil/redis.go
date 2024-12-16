@@ -17,7 +17,7 @@ package redisutil
 import (
 	"context"
 
-	"github.com/openimsdk/lion/tools/errs"
+	"github.com/liony823/tools/errs"
 	"github.com/redis/go-redis/v9"
 )
 

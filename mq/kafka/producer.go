@@ -18,7 +18,7 @@ import (
 	"context"
 
 	"github.com/IBM/sarama"
-	"github.com/openimsdk/lion/tools/errs"
+	"github.com/liony823/tools/errs"
 	"google.golang.org/protobuf/proto"
 )
 

@@ -19,13 +19,13 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/openimsdk/lion/tools/checker"
+	"github.com/liony823/tools/checker"
 
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
-	"github.com/openimsdk/lion/tools/apiresp"
-	"github.com/openimsdk/lion/tools/errs"
-	"github.com/openimsdk/lion/tools/utils/jsonutil"
+	"github.com/liony823/tools/apiresp"
+	"github.com/liony823/tools/errs"
+	"github.com/liony823/tools/utils/jsonutil"
 	"google.golang.org/grpc"
 )
 

@@ -3,8 +3,8 @@ package checker_test
 import (
 	"testing"
 
-	"github.com/openimsdk/lion/tools/checker"
-	"github.com/openimsdk/lion/tools/errs"
+	"github.com/liony823/tools/checker"
+	"github.com/liony823/tools/errs"
 	"github.com/stretchr/testify/assert"
 )
 

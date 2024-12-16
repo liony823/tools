@@ -19,12 +19,12 @@ import (
 	"strings"
 
 	"github.com/golang-jwt/jwt/v4"
-	"github.com/openimsdk/lion/tools/log"
-	"github.com/openimsdk/lion/tools/tokenverify"
+	"github.com/liony823/tools/log"
+	"github.com/liony823/tools/tokenverify"
 
 	"github.com/gin-gonic/gin"
-	"github.com/openimsdk/lion/tools/apiresp"
-	"github.com/openimsdk/lion/tools/errs"
+	"github.com/liony823/tools/apiresp"
+	"github.com/liony823/tools/errs"
 	"github.com/openimsdk/protocol/constant"
 )
 

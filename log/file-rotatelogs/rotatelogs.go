@@ -14,7 +14,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/openimsdk/lion/tools/log/file-rotatelogs/internal/fileutil"
+	"github.com/liony823/tools/log/file-rotatelogs/internal/fileutil"
 
 	strftime "github.com/lestrrat-go/strftime"
 	"github.com/pkg/errors"

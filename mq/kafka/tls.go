@@ -20,7 +20,7 @@ import (
 	"encoding/pem"
 	"os"
 
-	"github.com/openimsdk/lion/tools/errs"
+	"github.com/liony823/tools/errs"
 )
 
 // decryptPEM decrypts a PEM block using a password.

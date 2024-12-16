@@ -5,7 +5,7 @@ import (
 	"errors"
 
 	"github.com/IBM/sarama"
-	"github.com/openimsdk/lion/tools/mcontext"
+	"github.com/liony823/tools/mcontext"
 	"github.com/openimsdk/protocol/constant"
 )
 

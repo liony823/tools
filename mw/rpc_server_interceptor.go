@@ -5,11 +5,11 @@ import (
 	"fmt"
 	"math"
 
-	"github.com/openimsdk/lion/tools/checker"
+	"github.com/liony823/tools/checker"
 
-	"github.com/openimsdk/lion/tools/errs"
-	"github.com/openimsdk/lion/tools/log"
-	"github.com/openimsdk/lion/tools/mw/specialerror"
+	"github.com/liony823/tools/errs"
+	"github.com/liony823/tools/log"
+	"github.com/liony823/tools/mw/specialerror"
 	"github.com/openimsdk/protocol/constant"
 	"github.com/openimsdk/protocol/errinfo"
 	"google.golang.org/grpc"

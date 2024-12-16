@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/openimsdk/lion/tools/log/file-rotatelogs/internal/fileutil"
+	"github.com/liony823/tools/log/file-rotatelogs/internal/fileutil"
 
 	"github.com/jonboulle/clockwork"
 	"github.com/lestrrat-go/strftime"

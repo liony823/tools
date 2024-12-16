@@ -20,7 +20,7 @@ import (
 	"strings"
 
 	"github.com/go-zookeeper/zk"
-	"github.com/openimsdk/lion/tools/errs"
+	"github.com/liony823/tools/errs"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/resolver"
 )

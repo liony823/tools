@@ -20,8 +20,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/openimsdk/lion/tools/errs"
-	"github.com/openimsdk/lion/tools/log"
+	"github.com/liony823/tools/errs"
+	"github.com/liony823/tools/log"
 	"github.com/openimsdk/protocol/constant"
 	"github.com/openimsdk/protocol/errinfo"
 	"google.golang.org/grpc"

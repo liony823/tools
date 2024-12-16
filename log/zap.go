@@ -7,14 +7,14 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/openimsdk/lion/tools/errs"
-	rotatelogs "github.com/openimsdk/lion/tools/log/file-rotatelogs"
-	"github.com/openimsdk/lion/tools/utils/stringutil"
+	"github.com/liony823/tools/errs"
+	rotatelogs "github.com/liony823/tools/log/file-rotatelogs"
+	"github.com/liony823/tools/utils/stringutil"
 
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 
-	"github.com/openimsdk/lion/tools/mcontext"
+	"github.com/liony823/tools/mcontext"
 	"github.com/openimsdk/protocol/constant"
 )
 
