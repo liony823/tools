@@ -120,7 +120,6 @@ func CreateToken(userID string, accessSecret string, accessExpire int64, platfor
 }
 
 func GinPanicErr(c *gin.Context, err any) {
-	log.ZPanic(c, "GinPanicErr panic", err)
 	c.AbortWithStatus(http.StatusInternalServerError)
 }
 
@@ -128,7 +127,9 @@ func GinBasicAuth(username, password string) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		user, pwd, ok := c.Request.BasicAuth()
 		if !ok || user != username || pwd != password {
-			GinPanicErr(c, errs.ErrArgs.WrapMsg("basic auth failed"))
+			err := errs.New("basic auth failed")
+			apiresp.GinError(c, errs.ErrArgs.WrapMsg(err.Error()))
+			c.Abort()
 			return
 		}
 		c.Next()
