@@ -5,13 +5,13 @@ import (
 	"fmt"
 	"math"
 
-	"github.com/openimsdk/tools/checker"
+	"github.com/openimsdk/lion/tools/checker"
 
+	"github.com/openimsdk/lion/tools/errs"
+	"github.com/openimsdk/lion/tools/log"
+	"github.com/openimsdk/lion/tools/mw/specialerror"
 	"github.com/openimsdk/protocol/constant"
 	"github.com/openimsdk/protocol/errinfo"
-	"github.com/openimsdk/tools/errs"
-	"github.com/openimsdk/tools/log"
-	"github.com/openimsdk/tools/mw/specialerror"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"

@@ -4,9 +4,10 @@
 package main
 
 import (
-	"github.com/openimsdk/tools/utils/mageutil"
 	"os"
 	"strings"
+
+	"github.com/openimsdk/lion/tools/utils/mageutil"
 )
 
 var Default = Build

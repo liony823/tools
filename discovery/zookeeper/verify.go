@@ -20,7 +20,7 @@ import (
 	"time"
 
 	"github.com/go-zookeeper/zk"
-	"github.com/openimsdk/tools/errs"
+	"github.com/openimsdk/lion/tools/errs"
 	"google.golang.org/grpc"
 )
 

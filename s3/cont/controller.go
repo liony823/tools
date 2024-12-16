@@ -24,11 +24,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/openimsdk/tools/s3"
+	"github.com/openimsdk/lion/tools/s3"
 
 	"github.com/google/uuid"
-	"github.com/openimsdk/tools/errs"
-	"github.com/openimsdk/tools/log"
+	"github.com/openimsdk/lion/tools/errs"
+	"github.com/openimsdk/lion/tools/log"
 )
 
 func New(cache S3Cache, impl s3.Interface) *Controller {

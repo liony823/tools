@@ -15,12 +15,13 @@
 package idutil
 
 import (
-	"github.com/openimsdk/tools/utils/encrypt"
-	"github.com/openimsdk/tools/utils/stringutil"
-	"github.com/openimsdk/tools/utils/timeutil"
 	"math/rand"
 	"strconv"
 	"time"
+
+	"github.com/openimsdk/lion/tools/utils/encrypt"
+	"github.com/openimsdk/lion/tools/utils/stringutil"
+	"github.com/openimsdk/lion/tools/utils/timeutil"
 )
 
 func GetMsgIDByMD5(sendID string) string {

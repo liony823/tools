@@ -20,7 +20,7 @@ import (
 	"net/http"
 	"strings"
 
-	_ "github.com/openimsdk/tools/errs"
+	_ "github.com/openimsdk/lion/tools/errs"
 )
 
 // Define http headers.

@@ -19,7 +19,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/openimsdk/tools/errs"
+	"github.com/openimsdk/lion/tools/errs"
 )
 
 // OutDir creates the absolute path name from path and checks if the path exists and is a directory.

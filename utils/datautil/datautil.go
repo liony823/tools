@@ -15,14 +15,15 @@
 package datautil
 
 import (
-	"github.com/jinzhu/copier"
-	"github.com/openimsdk/tools/db/pagination"
-	"github.com/openimsdk/tools/errs"
-	"github.com/openimsdk/tools/utils/jsonutil"
 	"math/rand"
 	"reflect"
 	"sort"
 	"time"
+
+	"github.com/jinzhu/copier"
+	"github.com/openimsdk/lion/tools/db/pagination"
+	"github.com/openimsdk/lion/tools/errs"
+	"github.com/openimsdk/lion/tools/utils/jsonutil"
 )
 
 // SliceSubFuncs returns elements in slice a that are not present in slice b (a - b) and remove duplicates.

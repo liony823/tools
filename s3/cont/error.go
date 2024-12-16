@@ -16,7 +16,8 @@ package cont
 
 import (
 	"fmt"
-	"github.com/openimsdk/tools/s3"
+
+	"github.com/openimsdk/lion/tools/s3"
 )
 
 type HashAlreadyExistsError struct {

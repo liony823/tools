@@ -1,8 +1,9 @@
 package rotatelogs
 
 import (
-	"github.com/openimsdk/tools/log/file-rotatelogs/internal/option"
 	"time"
+
+	"github.com/openimsdk/lion/tools/log/file-rotatelogs/internal/option"
 )
 
 const (

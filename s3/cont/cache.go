@@ -2,7 +2,8 @@ package cont
 
 import (
 	"context"
-	"github.com/openimsdk/tools/s3"
+
+	"github.com/openimsdk/lion/tools/s3"
 )
 
 type S3Cache interface {

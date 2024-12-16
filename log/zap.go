@@ -7,15 +7,15 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/openimsdk/tools/errs"
-	rotatelogs "github.com/openimsdk/tools/log/file-rotatelogs"
-	"github.com/openimsdk/tools/utils/stringutil"
+	"github.com/openimsdk/lion/tools/errs"
+	rotatelogs "github.com/openimsdk/lion/tools/log/file-rotatelogs"
+	"github.com/openimsdk/lion/tools/utils/stringutil"
 
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 
+	"github.com/openimsdk/lion/tools/mcontext"
 	"github.com/openimsdk/protocol/constant"
-	"github.com/openimsdk/tools/mcontext"
 )
 
 type LogFormatter interface {

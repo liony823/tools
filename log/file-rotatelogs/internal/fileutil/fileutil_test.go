@@ -2,9 +2,10 @@ package fileutil_test
 
 import (
 	"fmt"
-	"github.com/openimsdk/tools/log/file-rotatelogs/internal/fileutil"
 	"testing"
 	"time"
+
+	"github.com/openimsdk/lion/tools/log/file-rotatelogs/internal/fileutil"
 
 	"github.com/jonboulle/clockwork"
 	"github.com/lestrrat-go/strftime"
