@@ -125,10 +125,9 @@ func GinPanicErr(c *gin.Context, err any) {
 
 func GinBasicAuth(username, password string) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		user, pwd, ok := c.Request.BasicAuth()
-		if !ok || user != username || pwd != password {
-			err := errs.New("basic auth failed")
-			apiresp.GinError(c, errs.ErrArgs.WrapMsg(err.Error()))
+		basicToken := c.Request.Header.Get("basicToken")
+		if basicToken == "" {
+			apiresp.GinError(c, errs.ErrArgs.WrapMsg("header must have basicToken"))
 			c.Abort()
 			return
 		}
