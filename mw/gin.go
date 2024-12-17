@@ -22,6 +22,8 @@ import (
 	"github.com/liony823/tools/log"
 	"github.com/liony823/tools/tokenverify"
 
+	"encoding/base64"
+
 	"github.com/gin-gonic/gin"
 	"github.com/liony823/tools/apiresp"
 	"github.com/liony823/tools/errs"
@@ -123,14 +125,62 @@ func GinPanicErr(c *gin.Context, err any) {
 	c.AbortWithStatus(http.StatusInternalServerError)
 }
 
-func GinBasicAuth() gin.HandlerFunc {
+func GinAdminBasicAuth(username, password, secretKey string) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		basicToken := c.Request.Header.Get("basicToken")
-		if basicToken == "" {
-			apiresp.GinError(c, errs.ErrArgs.WrapMsg("header must have basicToken"))
+		// 首先检查是否有 token
+		token := c.GetHeader("X-Auth-Token")
+		if token != "" {
+			// 验证 token
+			claims, err := tokenverify.GetClaimFromToken(token, func(token *jwt.Token) (interface{}, error) {
+				return []byte(secretKey), nil
+			})
+			if err == nil && claims.UserID == username {
+				// token 有效，允许请求继续
+				c.Set("basicAuthUser", claims.UserID)
+				c.Next()
+				return
+			}
+		}
+
+		// 如果没有 token 或 token 无效，检查 Basic Auth
+		auth := c.GetHeader("Authorization")
+		if auth == "" {
+			c.Header("WWW-Authenticate", `Basic realm="Authorization Required"`)
+			c.AbortWithStatus(http.StatusUnauthorized)
+			return
+		}
+
+		const prefix = "Basic "
+		if !strings.HasPrefix(auth, prefix) {
+			c.Header("WWW-Authenticate", `Basic realm="Authorization Required"`)
+			c.AbortWithStatus(http.StatusUnauthorized)
+			return
+		}
+
+		payload, err := base64.StdEncoding.DecodeString(auth[len(prefix):])
+		if err != nil {
+			c.Header("WWW-Authenticate", `Basic realm="Authorization Required"`)
+			c.AbortWithStatus(http.StatusUnauthorized)
+			return
+		}
+
+		pair := strings.SplitN(string(payload), ":", 2)
+		if len(pair) != 2 || pair[0] != username || pair[1] != password {
+			c.Header("WWW-Authenticate", `Basic realm="Authorization Required"`)
+			c.AbortWithStatus(http.StatusUnauthorized)
+			return
+		}
+
+		// 生成新的 token
+		token, err = CreateToken(pair[0], secretKey, 365, 10)
+		if err != nil {
+			apiresp.GinError(c, errs.ErrArgs.WrapMsg(err.Error()))
 			c.Abort()
 			return
 		}
+
+		c.Header("X-Auth-Token", token)
+		c.Set(constant.OpUserID, pair[0])
 		c.Next()
 	}
 }
