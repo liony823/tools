@@ -123,7 +123,7 @@ func GinPanicErr(c *gin.Context, err any) {
 	c.AbortWithStatus(http.StatusInternalServerError)
 }
 
-func GinBasicAuth(username, password string) gin.HandlerFunc {
+func GinBasicAuth() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		basicToken := c.Request.Header.Get("basicToken")
 		if basicToken == "" {
