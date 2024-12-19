@@ -172,7 +172,7 @@ func GinAdminBasicAuth(username, password, secretKey string) gin.HandlerFunc {
 		}
 
 		// 生成新的 token
-		token, err = CreateToken(pair[0], secretKey, 365, 10)
+		token, err = CreateToken(pair[0], secretKey, 1, 10)
 		if err != nil {
 			apiresp.GinError(c, errs.ErrArgs.WrapMsg(err.Error()))
 			c.Abort()
@@ -180,7 +180,6 @@ func GinAdminBasicAuth(username, password, secretKey string) gin.HandlerFunc {
 		}
 
 		c.Header("X-Auth-Token", token)
-		c.Set(constant.OpUserID, pair[0])
 		c.Next()
 	}
 }
