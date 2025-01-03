@@ -8,7 +8,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/openimsdk/tools/errs"
+	"github.com/liony823/tools/errs"
 	clientv3 "go.etcd.io/etcd/client/v3"
 	"go.etcd.io/etcd/client/v3/naming/endpoints"
 	"go.etcd.io/etcd/client/v3/naming/resolver"

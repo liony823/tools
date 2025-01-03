@@ -16,9 +16,10 @@ package errs
 
 import (
 	"fmt"
-	"github.com/openimsdk/tools/errs/stack"
 	"strconv"
 	"strings"
+
+	"github.com/liony823/tools/errs/stack"
 )
 
 const stackSkip = 4
