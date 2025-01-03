@@ -7,6 +7,8 @@ import (
 	"path/filepath"
 	"time"
 
+	"github.com/openimsdk/tools/errs"
+
 	"github.com/liony823/tools/errs"
 	rotatelogs "github.com/liony823/tools/log/file-rotatelogs"
 	"github.com/liony823/tools/utils/stringutil"
@@ -16,6 +18,13 @@ import (
 
 	"github.com/liony823/tools/mcontext"
 	"github.com/openimsdk/protocol/constant"
+)
+
+var (
+	AdaptiveDefaultLevel   = LevelWarn
+	AdaptiveErrorCodeLevel = map[int]int{
+		errs.ErrInternalServer.Code(): LevelError,
+	}
 )
 
 type LogFormatter interface {
@@ -130,8 +139,34 @@ func ZError(ctx context.Context, msg string, err error, keysAndValues ...any) {
 	pkgLogger.Error(ctx, msg, err, keysAndValues...)
 }
 
-func ZPanic(ctx context.Context, msg string, err interface{}, keysAndValues ...any) {
+func ZPanic(ctx context.Context, msg string, err error, keysAndValues ...any) {
 	pkgLogger.Panic(ctx, msg, err, keysAndValues...)
+}
+
+func ZAdaptive(ctx context.Context, msg string, err error, keysAndValues ...any) {
+	var level int
+	if cErr, ok := errs.Unwrap(err).(errs.CodeError); ok {
+		level, ok = AdaptiveErrorCodeLevel[cErr.Code()]
+		if !ok {
+			level = AdaptiveDefaultLevel
+		}
+	} else {
+		level = AdaptiveDefaultLevel
+	}
+	switch level {
+	case LevelDebug:
+
+		pkgLogger.Debug(ctx, msg, appendError(keysAndValues, err)...)
+	case LevelInfo:
+		pkgLogger.Info(ctx, msg, appendError(keysAndValues, err)...)
+	case LevelWarn:
+		pkgLogger.Warn(ctx, msg, err, keysAndValues...)
+	case LevelError:
+		pkgLogger.Error(ctx, msg, err, keysAndValues...)
+	case LevelPanic:
+		pkgLogger.Error(ctx, msg, err, keysAndValues...)
+	default:
+	}
 }
 
 func CInfo(ctx context.Context, msg string, keysAndValues ...any) {
@@ -403,10 +438,7 @@ func (l *ZapLogger) Warn(ctx context.Context, msg string, err error, keysAndValu
 	if l.level > zapcore.WarnLevel {
 		return
 	}
-	if err != nil {
-		keysAndValues = append(keysAndValues, "error", err.Error())
-	}
-	keysAndValues = l.kvAppend(ctx, keysAndValues)
+	keysAndValues = l.kvAppend(ctx, appendError(keysAndValues, err))
 	l.zap.Warnw(msg, keysAndValues...)
 }
 
@@ -414,28 +446,16 @@ func (l *ZapLogger) Error(ctx context.Context, msg string, err error, keysAndVal
 	if l.level > zapcore.ErrorLevel {
 		return
 	}
-	if err != nil {
-		keysAndValues = append(keysAndValues, "error", err.Error())
-	}
-	keysAndValues = l.kvAppend(ctx, keysAndValues)
+	keysAndValues = l.kvAppend(ctx, appendError(keysAndValues, err))
 	l.zap.Errorw(msg, keysAndValues...)
 }
 
-func (l *ZapLogger) Panic(ctx context.Context, msg string, r interface{}, keysAndValues ...any) {
+func (l *ZapLogger) Panic(ctx context.Context, msg string, err error, keysAndValues ...any) {
 	if l.level > zapcore.PanicLevel {
 		return
 	}
-
-	panicStack := errs.GetPanicStack()
-	if e, ok := r.(error); ok {
-		keysAndValues = append(keysAndValues, "error", e.Error())
-	} else {
-		keysAndValues = append(keysAndValues, "recover", r)
-	}
-	keysAndValues = append(keysAndValues, "stacktrace", panicStack)
-
-	keysAndValues = l.kvAppend(ctx, keysAndValues)
-	l.zap.Errorw(msg, keysAndValues...)
+	keysAndValues = l.kvAppend(ctx, appendError(keysAndValues, err))
+	l.zap.Panicw(msg, keysAndValues...)
 }
 
 func (l *ZapLogger) kvAppend(ctx context.Context, keysAndValues []any) []any {
@@ -458,7 +478,7 @@ func (l *ZapLogger) kvAppend(ctx context.Context, keysAndValues []any) []any {
 				}
 			}
 		} else {
-			ZError(ctx, "keysAndValues length is not even", nil)
+			ZError(ctx, "keysAndValues length is not even", errs.ErrInternalServer.Wrap())
 		}
 	}
 
@@ -499,4 +519,11 @@ func (l *ZapLogger) WithCallDepth(depth int) Logger {
 	dup := *l
 	dup.zap = l.zap.WithOptions(zap.AddCallerSkip(depth))
 	return &dup
+}
+
+func appendError(keysAndValues []any, err error) []any {
+	if err != nil {
+		keysAndValues = append(keysAndValues, "error", err.Error())
+	}
+	return keysAndValues
 }

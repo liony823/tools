@@ -52,6 +52,40 @@ func SliceSubFuncs[T, V any, E comparable](a []T, b []V, fna func(i T) E, fnb fu
 	return rs
 }
 
+// SliceIntersectFuncs returns the intersection (a ∩ b) of slices a and b, removing duplicates.
+// The equality of elements is determined by the custom functions fna and fnb provided for each slice.
+func SliceIntersectFuncs[T, V any, E comparable](a []T, b []V, fna func(i T) E, fnb func(i V) E) []T {
+	// If b is empty, return an empty slice
+	if len(b) == 0 {
+		return nil
+	}
+
+	// Map the elements of b to a set for fast lookup
+	k := make(map[E]struct{})
+	for _, item := range b {
+		k[fnb(item)] = struct{}{}
+	}
+
+	// Create a slice to store the intersection result
+	rs := make([]T, 0, len(a))
+	// Map for deduplication
+	t := make(map[E]struct{})
+
+	// Iterate over slice a and find the common elements with b
+	for _, item := range a {
+		// Get the comparison value of the element from slice a
+		e := fna(item)
+		// If the element exists in both a and b, and hasn't been added yet, add it to the result
+		if _, ok := k[e]; ok && t[e] == struct{}{} {
+			rs = append(rs, item)
+			t[e] = struct{}{}
+		}
+	}
+
+	// Return the intersection slice
+	return rs
+}
+
 // SliceSubFunc returns elements in slice a that are not present in slice b (a - b) and remove duplicates.
 // Determine if elements are equal based on the result returned by fn.
 func SliceSubFunc[T any, E comparable](a, b []T, fn func(i T) E) []T {
