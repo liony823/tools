@@ -47,6 +47,11 @@ func RpcClientInterceptor(ctx context.Context, method string, req, resp any, cc 
 	}()
 	log.ZInfo(ctx, "rpc client request", "method", method, "target", cc.Target(), "req", req)
 	err = invoker(ctx, method, req, resp, cc, opts...)
+
+	if err != nil {
+		log.ZError(ctx, "rpc client invoke failed", err, "method", method, "req", req)
+	}
+
 	if err == nil {
 		log.ZInfo(ctx, "rpc client response success", "method", method, "resp", resp)
 		return nil
@@ -60,8 +65,11 @@ func RpcClientInterceptor(ctx context.Context, method string, req, resp any, cc 
 	if sta.Code() == 0 {
 		log.ZError(ctx, "rpc client response failed GRPCStatus code is 0", err, "method", method, "req", req)
 		return errs.NewCodeError(errs.ServerInternalError, err.Error()).Wrap()
+	} else {
+		log.ZError(ctx, "rpc client response failed GRPCStatus code", err, "method", method, "req", req, "code", sta.Code())
 	}
 	if details := sta.Details(); len(details) > 0 {
+		log.ZInfo(ctx, "rpc client response details", "method", method, "details", details)
 		errInfo, ok := details[0].(*errinfo.ErrorInfo)
 		if ok {
 			s := strings.Join(errInfo.Warp, "->") + errInfo.Cause
