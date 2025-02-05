@@ -17,7 +17,7 @@ package apiresp
 import (
 	"net/http"
 
-	"github.com/liony823/tools/utils/jsonutil"
+	"github.com/openimsdk/tools/utils/jsonutil"
 )
 
 func httpJson(w http.ResponseWriter, data any) {

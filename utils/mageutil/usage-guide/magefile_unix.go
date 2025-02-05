@@ -6,7 +6,7 @@ package main
 import (
 	"syscall"
 
-	"github.com/liony823/tools/utils/mageutil"
+	"github.com/openimsdk/tools/utils/mageutil"
 )
 
 func setMaxOpenFiles() error {

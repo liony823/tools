@@ -16,10 +16,11 @@ package apiresp
 
 import (
 	"encoding/json"
+	"errors"
 	"reflect"
 
-	"github.com/liony823/tools/errs"
-	"github.com/liony823/tools/utils/jsonutil"
+	"github.com/openimsdk/tools/errs"
+	"github.com/openimsdk/tools/utils/jsonutil"
 )
 
 type ApiResponse struct {
@@ -78,13 +79,13 @@ func ParseError(err error) *ApiResponse {
 	if err == nil {
 		return ApiSuccess(nil)
 	}
-	unwrap := errs.Unwrap(err)
-	if codeErr, ok := unwrap.(errs.CodeError); ok {
-		resp := ApiResponse{ErrCode: codeErr.Code(), ErrMsg: codeErr.Msg(), ErrDlt: codeErr.Detail()}
-		if resp.ErrDlt == "" {
-			resp.ErrDlt = err.Error()
-		}
-		return &resp
+	var codeErr errs.CodeError
+	if errors.As(err, &codeErr) {
+		//resp := ApiResponse{ErrCode: codeErr.Code(), ErrMsg: codeErr.Msg(), ErrDlt: codeErr.Detail()}
+		//if resp.ErrDlt == "" {
+		//	resp.ErrDlt = err.Error()
+		//}
+		return &ApiResponse{ErrCode: codeErr.Code(), ErrMsg: codeErr.Msg(), ErrDlt: codeErr.Detail()}
 	}
-	return &ApiResponse{ErrCode: errs.ServerInternalError, ErrMsg: err.Error()}
+	return &ApiResponse{ErrCode: errs.ServerInternalError, ErrMsg: errs.Unwrap(err).Error()}
 }

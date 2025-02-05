@@ -19,7 +19,7 @@ import (
 	"fmt"
 
 	"github.com/IBM/sarama"
-	"github.com/liony823/tools/errs"
+	"github.com/openimsdk/tools/errs"
 )
 
 func CheckTopics(ctx context.Context, conf *Config, topics []string) error {

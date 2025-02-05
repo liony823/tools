@@ -18,7 +18,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/liony823/tools/errs"
+	"github.com/openimsdk/tools/errs"
 )
 
 const (

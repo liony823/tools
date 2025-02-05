@@ -16,12 +16,13 @@ package mw
 
 import (
 	"context"
+	"errors"
 	"strings"
 
-	"github.com/liony823/tools/errs"
-	"github.com/liony823/tools/log"
 	"github.com/openimsdk/protocol/constant"
 	"github.com/openimsdk/protocol/errinfo"
+	"github.com/openimsdk/tools/errs"
+	"github.com/openimsdk/tools/log"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
@@ -51,7 +52,10 @@ func RpcClientInterceptor(ctx context.Context, method string, req, resp any, cc 
 		log.ZInfo(ctx, "rpc client response success", "method", method, "resp", resp)
 		return nil
 	}
-	rpcErr, ok := err.(interface{ GRPCStatus() *status.Status })
+	if errors.As(err, new(errs.CodeError)) {
+		return err
+	}
+	rpcErr, ok := errs.Unwrap(err).(interface{ GRPCStatus() *status.Status })
 	if !ok {
 		log.ZError(ctx, "rpc client response failed not GRPCStatus", err, "method", method, "req", req)
 		return errs.ErrInternalServer.WrapMsg(err.Error())
@@ -67,6 +71,7 @@ func RpcClientInterceptor(ctx context.Context, method string, req, resp any, cc 
 			s := strings.Join(errInfo.Warp, "->") + errInfo.Cause
 			cErr := errs.NewCodeError(int(sta.Code()), sta.Message()).WithDetail(s).Wrap()
 			log.ZAdaptive(ctx, "rpc client response failed", cErr, "method", method, "req", req)
+			return cErr
 		}
 	}
 	cErr := errs.NewCodeError(int(sta.Code()), sta.Message()).Wrap()

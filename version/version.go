@@ -18,7 +18,7 @@ import (
 	"fmt"
 	"runtime"
 
-	"github.com/liony823/tools/errs"
+	"github.com/openimsdk/tools/errs"
 	"gopkg.in/src-d/go-git.v4"
 )
 

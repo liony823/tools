@@ -3,7 +3,7 @@ package errs
 import (
 	"fmt"
 
-	"github.com/liony823/tools/errs/stack"
+	"github.com/openimsdk/tools/errs/stack"
 )
 
 func ErrPanic(r any) error {

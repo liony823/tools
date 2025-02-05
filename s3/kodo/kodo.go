@@ -36,8 +36,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/credentials"
 	awss3 "github.com/aws/aws-sdk-go-v2/service/s3"
 	awss3types "github.com/aws/aws-sdk-go-v2/service/s3/types"
-	"github.com/liony823/tools/errs"
-	"github.com/liony823/tools/s3"
+	"github.com/openimsdk/tools/errs"
+	"github.com/openimsdk/tools/s3"
 	"github.com/qiniu/go-sdk/v7/auth"
 )
 

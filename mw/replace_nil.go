@@ -3,7 +3,7 @@ package mw
 import (
 	"reflect"
 
-	"github.com/liony823/tools/utils/datautil"
+	"github.com/openimsdk/tools/utils/datautil"
 )
 
 // ReplaceNil initialization nil values.

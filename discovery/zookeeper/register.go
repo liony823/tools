@@ -18,7 +18,7 @@ import (
 	"time"
 
 	"github.com/go-zookeeper/zk"
-	"github.com/liony823/tools/errs"
+	"github.com/openimsdk/tools/errs"
 	"google.golang.org/grpc"
 )
 

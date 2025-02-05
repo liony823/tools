@@ -1,4 +1,4 @@
-module github.com/liony823/tools
+module github.com/openimsdk/tools
 
 go 1.22.0
 

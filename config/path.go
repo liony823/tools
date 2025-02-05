@@ -18,7 +18,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/liony823/tools/errs"
+	"github.com/openimsdk/tools/errs"
 )
 
 // PathResolver defines methods for resolving paths related to the application.

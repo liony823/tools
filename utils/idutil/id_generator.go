@@ -19,9 +19,9 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/liony823/tools/utils/encrypt"
-	"github.com/liony823/tools/utils/stringutil"
-	"github.com/liony823/tools/utils/timeutil"
+	"github.com/openimsdk/tools/utils/encrypt"
+	"github.com/openimsdk/tools/utils/stringutil"
+	"github.com/openimsdk/tools/utils/timeutil"
 )
 
 func GetMsgIDByMD5(sendID string) string {

@@ -14,7 +14,7 @@
 
 package cont
 
-import "github.com/liony823/tools/s3"
+import "github.com/openimsdk/tools/s3"
 
 type InitiateUploadResult struct {
 	// UploadID uniquely identifies the upload session for tracking and management purposes.

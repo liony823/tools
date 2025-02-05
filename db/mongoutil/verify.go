@@ -17,7 +17,7 @@ package mongoutil
 import (
 	"context"
 
-	"github.com/liony823/tools/errs"
+	"github.com/openimsdk/tools/errs"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )

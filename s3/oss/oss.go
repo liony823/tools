@@ -30,10 +30,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/liony823/tools/s3"
+	"github.com/openimsdk/tools/s3"
 
 	"github.com/aliyun/aliyun-oss-go-sdk/oss"
-	"github.com/liony823/tools/errs"
+	"github.com/openimsdk/tools/errs"
 )
 
 const (
@@ -292,6 +292,9 @@ func (o *OSS) ListUploadedParts(ctx context.Context, uploadID string, name strin
 func (o *OSS) AccessURL(ctx context.Context, name string, expire time.Duration, opt *s3.AccessURLOption) (string, error) {
 	if opt != nil && opt.Image != nil {
 		opt.Filename = ""
+		opt.ContentType = ""
+	}
+	if opt != nil {
 		opt.ContentType = ""
 	}
 	var opts []oss.Option

@@ -18,7 +18,7 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/liony823/tools/errs"
+	"github.com/openimsdk/tools/errs"
 )
 
 // GetString returns the env variable for the given key

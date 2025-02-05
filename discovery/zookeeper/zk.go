@@ -22,8 +22,8 @@ import (
 	"time"
 
 	"github.com/go-zookeeper/zk"
-	"github.com/liony823/tools/errs"
-	"github.com/liony823/tools/log"
+	"github.com/openimsdk/tools/errs"
+	"github.com/openimsdk/tools/log"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/resolver"
 )

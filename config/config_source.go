@@ -17,7 +17,7 @@ package config
 import (
 	"os"
 
-	"github.com/liony823/tools/errs"
+	"github.com/openimsdk/tools/errs"
 )
 
 // ConfigSource configuring source interfaces.

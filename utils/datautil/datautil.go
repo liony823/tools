@@ -21,9 +21,9 @@ import (
 	"time"
 
 	"github.com/jinzhu/copier"
-	"github.com/liony823/tools/db/pagination"
-	"github.com/liony823/tools/errs"
-	"github.com/liony823/tools/utils/jsonutil"
+	"github.com/openimsdk/tools/db/pagination"
+	"github.com/openimsdk/tools/errs"
+	"github.com/openimsdk/tools/utils/jsonutil"
 )
 
 // SliceSubFuncs returns elements in slice a that are not present in slice b (a - b) and remove duplicates.

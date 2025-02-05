@@ -7,15 +7,16 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/liony823/tools/errs"
-	rotatelogs "github.com/liony823/tools/log/file-rotatelogs"
-	"github.com/liony823/tools/utils/stringutil"
+	"github.com/openimsdk/tools/errs"
+
+	rotatelogs "github.com/openimsdk/tools/log/file-rotatelogs"
+	"github.com/openimsdk/tools/utils/stringutil"
 
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 
-	"github.com/liony823/tools/mcontext"
 	"github.com/openimsdk/protocol/constant"
+	"github.com/openimsdk/tools/mcontext"
 )
 
 var (
@@ -138,7 +139,7 @@ func ZError(ctx context.Context, msg string, err error, keysAndValues ...any) {
 }
 
 func ZPanic(ctx context.Context, msg string, err error, keysAndValues ...any) {
-	pkgLogger.Panic(ctx, msg, err, keysAndValues...)
+	pkgLogger.Error(ctx, msg, err, keysAndValues...)
 }
 
 func ZAdaptive(ctx context.Context, msg string, err error, keysAndValues ...any) {
@@ -258,7 +259,7 @@ func NewConsoleZapLogger(
 func (l *ZapLogger) cores(isStdout bool, isJson bool, logLocation string, rotateCount uint) (zap.Option, error) {
 	c := zap.NewProductionEncoderConfig()
 	c.EncodeTime = l.timeEncoder
-	c.EncodeDuration = zapcore.SecondsDurationEncoder
+	c.EncodeDuration = zapcore.StringDurationEncoder
 	c.MessageKey = "msg"
 	c.LevelKey = "level"
 	c.TimeKey = "time"
@@ -298,7 +299,7 @@ func (l *ZapLogger) cores(isStdout bool, isJson bool, logLocation string, rotate
 func (l *ZapLogger) consoleCores(outPut *os.File, isJson bool) (zap.Option, error) {
 	c := zap.NewProductionEncoderConfig()
 	c.EncodeTime = l.timeEncoder
-	c.EncodeDuration = zapcore.SecondsDurationEncoder
+	c.EncodeDuration = zapcore.StringDurationEncoder
 	c.MessageKey = "msg"
 	c.LevelKey = "level"
 	c.TimeKey = "time"
@@ -470,7 +471,6 @@ func (l *ZapLogger) kvAppend(ctx context.Context, keysAndValues []any) []any {
 	if l.isSimplify {
 		if len(keysAndValues)%2 == 0 {
 			for i := 1; i < len(keysAndValues); i += 2 {
-
 				if val, ok := keysAndValues[i].(LogFormatter); ok && val != nil {
 					keysAndValues[i] = val.Format()
 				}

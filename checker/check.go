@@ -14,7 +14,7 @@
 
 package checker
 
-import "github.com/liony823/tools/errs"
+import "github.com/openimsdk/tools/errs"
 
 type Checker interface {
 	Check() error

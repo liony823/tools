@@ -17,7 +17,7 @@ package zookeeper
 import (
 	"time"
 
-	"github.com/liony823/tools/log"
+	"github.com/openimsdk/tools/log"
 	"google.golang.org/grpc"
 )
 

@@ -14,7 +14,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/liony823/tools/log/file-rotatelogs/internal/fileutil"
+	"github.com/openimsdk/tools/log/file-rotatelogs/internal/fileutil"
 
 	"errors"
 

@@ -3,7 +3,7 @@ package rotatelogs
 import (
 	"time"
 
-	"github.com/liony823/tools/log/file-rotatelogs/internal/option"
+	"github.com/openimsdk/tools/log/file-rotatelogs/internal/option"
 )
 
 const (
