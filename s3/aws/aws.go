@@ -10,6 +10,12 @@ import (
 	"strings"
 	"time"
 
+	"net/http"
+	"net/url"
+	"strconv"
+	"strings"
+	"time"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
@@ -56,12 +62,12 @@ func (a *Aws) Engine() string {
 	return "aws"
 }
 
-func (a *Aws) PartLimit() *s3.PartLimit {
+func (a *Aws) PartLimit() (*s3.PartLimit, error) {
 	return &s3.PartLimit{
 		MinPartSize: minPartSize,
 		MaxPartSize: maxPartSize,
 		MaxNumSize:  maxNumSize,
-	}
+	}, nil
 }
 
 func (a *Aws) formatETag(etag string) string {
